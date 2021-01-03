@@ -4,16 +4,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solar System Goes Brrrr</title>
     <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-extras/dist/aframe-physics-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
   </head>
   <body>
+
     <script type="text/javascript" src="js/app.js"></script>
-    <a-scene appear>
-      <a-entity id="rig" position="-3 2 1" movement-controls kinematic-body>
+    
+    <a-scene appear physics="debug: true restitution: 100">
+      <a-sound src="src: model/sound/space.mp3" autoplay="true" loop="true"></a-sound>
+      <a-entity id="rig" position="0 1 10.5" movement-controls kinematic-body>
         <a-entity id="camera"
           camera
-          position="-3 2 1"
+          position="0 1 0"
           look-controls="pointerLockEnabled: true">
           <a-entity
                 raycaster="objects:.clickable"
@@ -35,97 +39,106 @@
                     property: scale;
                     to: 1 1 1;
                     startEvents: mouseleave;">
-            <a-entity id="ingfo" visible="false" position="0 3.5 -4" geometry="primitive: plane; height: 8; width: 5" material="side: double">
-              <a-text font="monoid" id="nama" position="-1 2 0" width="14" value ="Loading..." color="#000"></a-text>
-              <a-text font="dejavu" id="massa" position="-2 1 0" width="7" value ="Loading..." color="#000"></a-text>
-              <a-text font="dejavu" id="volum" position="-2 0 0" width="7" value ="Loading..." color="#000"></a-text>
-              <a-text font="dejavu" id="densy" position="-2 -1 0" width="7" value ="Loading..." color="#000"></a-text>
-              <a-text font="dejavu" id="gravy" position="-2 -2 0" width="7" value ="Loading..." color="#000"></a-text>
-              <a-text font="dejavu" id="erad" position="-2 -3 0" width="7" value ="Loading..." color="#000"></a-text>
+            <a-entity id="ingfo" visible="false" position="0 3.5 -4" geometry="primitive: plane; height: 8; width: 5" material="side: double; src: model/texture/box.png">
+              <a-text id="nama" position="-1 2.5 0" width="14" value ="Loading..." color="#000"></a-text>
+              <a-text id="massa" position="-2 1.5 0" width="7" value ="Loading..." color="#000"></a-text>
+              <a-text id="volum" position="-2 0.5 0" width="7" value ="Loading..." color="#000"></a-text>
+              <a-text id="densy" position="-2 -0.5 0" width="7" value ="Loading..." color="#000"></a-text>
+              <a-text id="gravy" position="-2 -1.5 0" width="7" value ="Loading..." color="#000"></a-text>
+              <a-text id="erad" position="-2 -2.5 0" width="7" value ="Loading..." color="#000"></a-text>
             </a-entity>
           </a-entity>
         </a-entity>
       </a-entity>
 
-      <a-plane  static-body height="300" width="300" rotation="-90 0 0" material="opacity: 0.0; transparent: true"></a-plane>
+      <a-plane static-body height="30" width="30" rotation="-90 0 0" material="src: model/texture/floor.jpg; repeat: 30 30"></a-plane>
+      <a-plane static-body id="wall" height="5" width="30" position="0 2.361 -15" material="src: model/texture/wall.png; repeat: 15 5"></a-plane>
+      <a-plane static-body id="wall" height="5" width="30" rotation="0 90 0" position="-15 2.361 0" material="src: model/texture/wall.png; repeat: 15 5"></a-plane>
+      <a-plane static-body id="wall" height="5" width="30" rotation="0 -90 0" position="15 2.361 0" material="src: model/texture/wall.png; repeat: 15 5"></a-plane>
+      <a-plane static-body id="wall" height="5" width="30" rotation="-180 0 -180" position="0 2.361 15" material="src: model/texture/wall.png; repeat: 15 5"></a-plane>
 
       <a-sphere id="sun"
-        position="0 2 0" 
+        position="0 3 0" 
         radius="2" 
-        src="https://cdn.glitch.com/c1051546-359f-4e34-b17d-bd2b8900be35%2Fthumbnails%2F2k_sun.jpg?1599075846071"
+        src="model/texture/sun.jpg"
+        static-body
       ></a-sphere>
       
-      <a-sphere id="mercury" rotation="0 300.37816131120167 0" 
-        position="2.39105 2 0.97484" 
-        radius="0.04" 
-        src="https://cdn.glitch.com/c1051546-359f-4e34-b17d-bd2b8900be35%2Fthumbnails%2F2k_mercury.jpg?1599076763523"
-        animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: NaN"
-        class="clickable"
-      ></a-sphere>
+      <a-entity id="grotate" position ="0 0 0" animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true; easing: linear">
+        <a-sphere id="mercury" 
+          position="2.39105 3 0.97484" 
+          radius="0.1" 
+          src="model/texture/mercury.jpg"
+          animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
+          class="clickable"
+        ></a-sphere>
 
-      <a-sphere id="venus" 
-        position="3.22895 2 -0.26129" 
-        radius="0.095" 
-        src="https://cdn.glitch.com/c1051546-359f-4e34-b17d-bd2b8900be35%2Fthumbnails%2F2k_venus_surface.jpg?1599076880651"
-        animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: NaN"
-        class="clickable"      
-      ></a-sphere>
+        <a-sphere id="venus" 
+          position="3.22895 3 -0.26129" 
+          radius="0.15" 
+          src="model/texture/venus.jpg"
+          animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
+          class="clickable"      
+        ></a-sphere>
 
-      <a-sphere id="earth" 
-        position="3.19207 2 2.70196" 
-        radius="0.1" 
-        src="https://cdn.glitch.com/c1051546-359f-4e34-b17d-bd2b8900be35%2Fthumbnails%2F2k_earth_daymap.jpg?1599077106967"
-        animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
-        class="clickable"  
-      ></a-sphere>
+        <a-sphere id="earth" 
+          position="3.19207 3 2.70196" 
+          radius="0.25" 
+          src="model/texture/earth.jpg"
+          animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
+          class="clickable"  
+        ></a-sphere>
 
-      <a-sphere id="mars" 
-        position="4.70952 2 -3.2902" 
-        radius="0.06" 
-        src="https://cdn.glitch.com/c1051546-359f-4e34-b17d-bd2b8900be35%2Fthumbnails%2F2k_mars.jpg?1599076925143"
-        animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: NaN"
-        class="clickable"
-      ></a-sphere>
+        <a-sphere id="mars" 
+          position="4.70952 3 -3.2902" 
+          radius="0.2" 
+          src="model/texture/mars.jpg"
+          animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
+          class="clickable"
+        ></a-sphere>
 
-      <a-sphere id="jupiter" 
-        position="-5.57482 2 0.23966" radius="1"
-        src="https://cdn.glitch.com/c1051546-359f-4e34-b17d-bd2b8900be35%2Fthumbnails%2F2k_jupiter.jpg?1599076956485"
-        animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: NaN"
-        class="clickable" 
-      ></a-sphere>
+        <a-sphere id="jupiter" 
+          position="-5.57482 3 0.23966" 
+          radius="1"
+          src="model/texture/jupiter.jpg"
+          animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
+          class="clickable" 
+        ></a-sphere>
 
-      <a-sphere id="saturn" 
-        position="8 2 0" 
-        radius="0.9" 
-        src="https://cdn.glitch.com/c1051546-359f-4e34-b17d-bd2b8900be35%2Fthumbnails%2F2k_saturn.jpg?1599076998015"
-        animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: NaN"
-        class="clickable"
-      ></a-sphere>
-      <a-ring
-        position="8 2 0" 
-        rotation="45 45"
-        radius-inner="1"
-        radius-outer="1.5" 
-        material="side: double"
-      ></a-ring>
+        <a-sphere id="saturn" 
+          position="8 3 0" 
+          radius="0.9" 
+          src="model/texture/saturn.jpg"
+          animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
+          class="clickable"
+        ></a-sphere>
+        <a-ring
+          position="8 3 0" 
+          rotation="45 45"
+          radius-inner="1"
+          radius-outer="1.5"
+          src="model/texture/saturnring.png"
+          material="side: double"
+        ></a-ring>
 
-      <a-sphere id="uranus" 
-        position="1.17048 2 -8.15925" 
-        radius="0.4" 
-        src="https://cdn.glitch.com/c1051546-359f-4e34-b17d-bd2b8900be35%2Fthumbnails%2F2k_uranus.jpg?1599077034779"
-        animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
-        class="clickable"
-      ></a-sphere>
+        <a-sphere id="uranus" 
+          position="1.17048 3 -8.15925" 
+          radius="0.4" 
+          src="model/texture/uranus.jpg"
+          animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
+          class="clickable"
+        ></a-sphere>
 
-      <a-sphere id="neptune" 
-        position="1.86347 2 7.19724" 
-        radius="0.4"
-        src="https://cdn.glitch.com/c1051546-359f-4e34-b17d-bd2b8900be35%2Fthumbnails%2F2k_neptune.jpg?1599077063451"
-        animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
-        class="clickable"
-      ></a-sphere>
+        <a-sphere id="neptune" 
+          position="1.86347 3 7.19724" 
+          radius="0.4"
+          src="model/texture/neptune.jpg"
+          animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
+          class="clickable"
+        ></a-sphere>
+      </a-entity>
 
-      <a-sky src="https://cdn.glitch.com/c1051546-359f-4e34-b17d-bd2b8900be35%2Fthumbnails%2F2k_stars_milky_way.jpg?1599075382958"></a-sky> 
+      <a-sky src="model/texture/space.jpg"></a-sky>
     </a-scene>   
   </body>
 </html>

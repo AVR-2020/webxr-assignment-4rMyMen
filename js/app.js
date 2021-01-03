@@ -15,8 +15,8 @@ function get_data(name){
 		  if (request.status==200) {
 		  	info["recently"] = data.englishName
 		  	info["status"] = "successful"
-		  	info["mass"] = data.mass.massValue+" "+data.mass.massExponent
-			info["volume"] = data.vol.volValue+" "+data.vol.volExponent
+		  	info["mass"] = data.mass.massValue+" X10^"+data.mass.massExponent
+			info["volume"] = data.vol.volValue+" X10^"+data.vol.volExponent
 			info["density"] = data.density
 			info["gravity"] = data.gravity
 			info["equaRadius"] = data.equaRadius
@@ -47,6 +47,7 @@ AFRAME.registerComponent('appear', {
       var densy = sceneEl.querySelector('#densy')
 	  var gravy = sceneEl.querySelector('#gravy')
 	  var erad	= sceneEl.querySelector('#erad')
+	  var grotate = sceneEl.querySelector('#grotate')
       var mercury = sceneEl.querySelector('#mercury')
       var venus = sceneEl.querySelector('#venus')
       var earth = sceneEl.querySelector('#earth')
@@ -60,72 +61,88 @@ AFRAME.registerComponent('appear', {
 		var name = "Mercury"
 		get_data(name)
       	setTimeout( () => {set_data(name)}, 500)
-	    ingfo.object3D.visible = true
-		setTimeout( () => {ingfo.object3D.visible = false}, 5000)
-		console.log(set_data.nama)
+		ingfo.object3D.visible = true
+		grotate.pause()
+		setTimeout( () => {ingfo.object3D.visible = false}, 8000)
+		setTimeout( () => {grotate.play()}, 8000)
+		console.log(set_data.name)
     });
 
   	venus.addEventListener('click', function () {
 		var name = "Venus"
 		get_data(name)
       	setTimeout( () => {set_data(name)}, 500)
-	    ingfo.object3D.visible = true
-		setTimeout( () => {ingfo.object3D.visible = false}, 5000)
-		console.log(set_data.nama)
+		ingfo.object3D.visible = true
+		grotate.pause()
+		setTimeout( () => {ingfo.object3D.visible = false}, 8000)
+		setTimeout( () => {grotate.play()}, 8000)
+		console.log(set_data.name)
   	});
 
     earth.addEventListener('click', function () {
 		var name = "Earth"
 		get_data(name)
       	setTimeout( () => {set_data(name)}, 500)
-	    ingfo.object3D.visible = true
-		setTimeout( () => {ingfo.object3D.visible = false}, 5000)
-		console.log(set_data.nama)
+		ingfo.object3D.visible = true
+		grotate.pause()
+		setTimeout( () => {ingfo.object3D.visible = false}, 8000)
+		setTimeout( () => {grotate.play()}, 8000)
+		console.log(set_data.name)
 	});
 
 	mars.addEventListener('click', function () {
 		var name = "Mars"
 		get_data(name)
       	setTimeout( () => {set_data(name)}, 500)
-	    ingfo.object3D.visible = true
-		setTimeout( () => {ingfo.object3D.visible = false}, 5000)
-		console.log(set_data.nama)
+		ingfo.object3D.visible = true
+		grotate.pause()
+		setTimeout( () => {ingfo.object3D.visible = false}, 8000)
+		setTimeout( () => {grotate.play()}, 8000)
+		console.log(set_data.name)
 	});
 
 	jupiter.addEventListener('click', function () {
 		var name = "Jupiter"
 		get_data(name)
       	setTimeout( () => {set_data(name)}, 500)
-	    ingfo.object3D.visible = true
-		setTimeout( () => {ingfo.object3D.visible = false}, 5000)
-		console.log(set_data.nama)
+		ingfo.object3D.visible = true
+		grotate.pause()
+		setTimeout( () => {ingfo.object3D.visible = false}, 8000)
+		setTimeout( () => {grotate.play()}, 8000)
+		console.log(set_data.name)
 	});
 
 	saturn.addEventListener('click', function () {
 		var name = "Saturn"
 		get_data(name)
       	setTimeout( () => {set_data(name)}, 500)
-	    ingfo.object3D.visible = true
-		setTimeout( () => {ingfo.object3D.visible = false}, 5000)
-		console.log(set_data.nama)
+		ingfo.object3D.visible = true
+		grotate.pause()
+		setTimeout( () => {ingfo.object3D.visible = false}, 8000)
+		setTimeout( () => {grotate.play()}, 8000)
+		console.log(set_data.name)
 	});
 
 	uranus.addEventListener('click', function () {
 		var name = "Uranus"
 		get_data(name)
       	setTimeout( () => {set_data(name)}, 500)
-	    ingfo.object3D.visible = true
-		setTimeout( () => {ingfo.object3D.visible = false}, 5000)
-		console.log(set_data.nama)
+		ingfo.object3D.visible = true
+		grotate.pause()
+		setTimeout( () => {ingfo.object3D.visible = false}, 8000)
+		setTimeout( () => {grotate.play()}, 8000)
+		console.log(set_data.name)
 	});
 
 	neptune.addEventListener('click', function () {
 		var name = "Neptune"
 		get_data(name)
       	setTimeout( () => {set_data(name)}, 500)
-	    ingfo.object3D.visible = true
-		setTimeout( () => {ingfo.object3D.visible = false}, 5000)
-		console.log(set_data.nama)
+		ingfo.object3D.visible = true
+		grotate.pause()
+		setTimeout( () => {ingfo.object3D.visible = false}, 8000)
+		setTimeout( () => {grotate.play()}, 8000)
+		console.log(set_data.name)
 	});
 
   	}
