@@ -12,8 +12,17 @@
 
     <script type="text/javascript" src="js/app.js"></script>
     
-    <a-scene appear physics="debug: true restitution: 100">
-      <a-sound src="src: model/sound/space.mp3" autoplay="true" loop="true"></a-sound>
+    <a-scene appear physics="debug: true">
+      <a-assets>
+        <a-asset-item id="obj" src="model/screen.obj"></a-asset-item>
+        <a-asset-item id="mtl" src="model/screen.mtl"></a-asset-item>
+      </a-assets>
+
+      <a-obj-model src="#obj" mtl="#mtl" scale="0.1 0.1 0.1 "position="0 4.51 -11.68" shader="flat">
+        <a-text id"welcome" value="Welcome" position="-39.155 8.596 -22.340" width="300" color="#000"></a-text>
+        <a-text id"welcome" value="Solar Gallery" position="-42.142 -5 -22.340" width="300" color="#000"></a-text>
+      </a-obj-model>
+
       <a-entity id="rig" position="0 1 10.5" movement-controls kinematic-body>
         <a-entity id="camera"
           camera
@@ -27,7 +36,7 @@
                 geometry="
                 primitive: circle; 
                 radius: 0.1"
-                material="side: double; color: red;"               
+                material="side: double; color: red; shader: flat;"               
                 position="0 0 -2"
                 animation__fusing="
                     property: scale;
@@ -39,7 +48,7 @@
                     property: scale;
                     to: 1 1 1;
                     startEvents: mouseleave;">
-            <a-entity id="ingfo" visible="false" position="0 3.5 -4" geometry="primitive: plane; height: 8; width: 5" material="side: double; src: model/texture/box.png">
+            <a-entity id="ingfo" visible="false" position="0 3.5 -4" geometry="primitive: plane; height: 8; width: 5" material="side: double; shader: flat; src: model/texture/box.png">
               <a-text id="nama" position="-1 2.5 0" width="14" value ="Loading..." color="#000"></a-text>
               <a-text id="massa" position="-2 1.5 0" width="7" value ="Loading..." color="#000"></a-text>
               <a-text id="volum" position="-2 0.5 0" width="7" value ="Loading..." color="#000"></a-text>
@@ -52,21 +61,25 @@
       </a-entity>
 
       <a-plane static-body height="30" width="30" rotation="-90 0 0" material="src: model/texture/floor.jpg; repeat: 30 30"></a-plane>
-      <a-plane static-body id="wall" height="5" width="30" position="0 2.361 -15" material="src: model/texture/wall.png; repeat: 15 5"></a-plane>
-      <a-plane static-body id="wall" height="5" width="30" rotation="0 90 0" position="-15 2.361 0" material="src: model/texture/wall.png; repeat: 15 5"></a-plane>
-      <a-plane static-body id="wall" height="5" width="30" rotation="0 -90 0" position="15 2.361 0" material="src: model/texture/wall.png; repeat: 15 5"></a-plane>
-      <a-plane static-body id="wall" height="5" width="30" rotation="-180 0 -180" position="0 2.361 15" material="src: model/texture/wall.png; repeat: 15 5"></a-plane>
+      <a-plane static-body id="wall" height="10" width="30" position="0 4.8 -15" material="src: model/texture/wall.png; repeat: 15 5"></a-plane>
+      <a-plane static-body id="wall" height="10" width="30" rotation="0 90 0" position="-15 4.8 0" material="src: model/texture/wall.png; repeat: 15 5"></a-plane>
+      <a-plane static-body id="wall" height="10" width="30" rotation="0 -90 0" position="15 4.8 0" material="src: model/texture/wall.png; repeat: 15 5"></a-plane>
+      <a-plane static-body id="wall" height="10" width="30" rotation="-180 0 -180" position="0 4.8 15" material="src: model/texture/wall.png; repeat: 15 5"></a-plane>
 
       <a-sphere id="sun"
         position="0 3 0" 
         radius="2" 
         src="model/texture/sun.jpg"
+        material="shader: flat"
+        light="type: point"
         static-body
       ></a-sphere>
-      
-      <a-entity id="grotate" position ="0 0 0" animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true; easing: linear">
+
+      <a-entity light="type: ambient intensity: 0.2"></a-entity>
+
+      <a-entity id="grotate" position ="0 0 0" animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 60000; loop: NaN; easing: linear; autoplay: true">
         <a-sphere id="mercury" 
-          position="2.39105 3 0.97484" 
+          position="2.84718 3 0.95444" 
           radius="0.1" 
           src="model/texture/mercury.jpg"
           animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
@@ -74,7 +87,7 @@
         ></a-sphere>
 
         <a-sphere id="venus" 
-          position="3.22895 3 -0.26129" 
+          position="3.58045 3 -0.27701" 
           radius="0.15" 
           src="model/texture/venus.jpg"
           animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
@@ -82,7 +95,7 @@
         ></a-sphere>
 
         <a-sphere id="earth" 
-          position="3.19207 3 2.70196" 
+          position="3.59061 3 3.31613" 
           radius="0.25" 
           src="model/texture/earth.jpg"
           animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
@@ -90,15 +103,15 @@
         ></a-sphere>
 
         <a-sphere id="mars" 
-          position="4.70952 3 -3.2902" 
+          position="5.30329 3 -3.31676" 
           radius="0.2" 
           src="model/texture/mars.jpg"
           animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
           class="clickable"
         ></a-sphere>
 
-        <a-sphere id="jupiter" 
-          position="-5.57482 3 0.23966" 
+        <a-sphere id="jupiter" rotation="0 13.276806667172345 0" 
+          position="-6.63394 3 0.18459" 
           radius="1"
           src="model/texture/jupiter.jpg"
           animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
@@ -106,14 +119,14 @@
         ></a-sphere>
 
         <a-sphere id="saturn" 
-          position="8 3 0" 
+          position="8.90944 3 0.00713" 
           radius="0.9" 
           src="model/texture/saturn.jpg"
           animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
           class="clickable"
         ></a-sphere>
         <a-ring
-          position="8 3 0" 
+          position="8.90944 3 0.00713" 
           rotation="45 45"
           radius-inner="1"
           radius-outer="1.5"
@@ -122,7 +135,7 @@
         ></a-ring>
 
         <a-sphere id="uranus" 
-          position="1.17048 3 -8.15925" 
+          position="0.68791 3 -10.24172" 
           radius="0.4" 
           src="model/texture/uranus.jpg"
           animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
@@ -130,7 +143,7 @@
         ></a-sphere>
 
         <a-sphere id="neptune" 
-          position="1.86347 3 7.19724" 
+          position="1.73491 3 10.64696" 
           radius="0.4"
           src="model/texture/neptune.jpg"
           animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; loop: true"
