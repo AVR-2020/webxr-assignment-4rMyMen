@@ -1,2 +1,1 @@
-# webxr-assignment-PaksiArio
-webxr-assignment-4rMyMen created by GitHub Classroom
+Paksi Ario P - 0511174000076
